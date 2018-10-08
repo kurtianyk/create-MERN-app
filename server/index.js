@@ -1,10 +1,10 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const helmet = require('helmet');
-const bodyParser = require('body-parser');
-const mongoDBConfig = require('./db/config');
+import express from 'express';
+import mongoose from 'mongoose';
+import helmet from 'helmet';
+import bodyParser from 'body-parser';
+import router from './routes';
+import { MONGODB_URI, MONGODB_OPTIONS, PORT } from './config';
 
-const PORT = process.env.PORT || 4000;
 const app = express();
 
 app.use(helmet());
@@ -12,11 +12,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('dist'));
 
-app.get('/api', (req, res) => {
-  res.send('Hello World!');
-});
+app.use('/api', router);
 
-mongoose.connect(mongoDBConfig.uri, mongoDBConfig.options);
+// app.get('/api', (req, res) => {
+//   res.send('Hello World!');
+// });
+
+mongoose.connect(MONGODB_URI, MONGODB_OPTIONS);
 
 mongoose.connection.on('connected', () => {
   app.listen(PORT, () => {
