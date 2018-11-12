@@ -9,6 +9,7 @@
       "no-console": "off",
       "comma-dangle": "off",
       "react/jsx-filename-extension": "off",
+      "import/prefer-default-export": "off",
       "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
       "linebreak-style": ["error", "windows"]
     }

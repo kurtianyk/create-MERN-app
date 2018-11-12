@@ -1,18 +1,19 @@
 {
-  "name": "mern-chat",
+  "name": "create-MERN-app",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server/index.js",
+  "parser": "babel-eslint",
   "scripts": {
-    "start": "babel-node server/index.js",
+    "start": "babel-node src/server/index.js",
     "build": "webpack --mode production",
-    "client": "webpack-dev-server --mode development --devtool source-map",
-    "server": "nodemon server/index.js --exec babel-node",
+    "client": "webpack-dev-server --hot --mode development",
+    "server": "nodemon src/server/index.js --exec babel-node",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx; true"
   },
-  "author": "",
+  "author": "Oleh Kurtianyk",
   "license": "ISC",
   "dependencies": {
     "autoprefixer": "^9.1.5",
@@ -22,7 +23,10 @@
     "mongoose": "^5.3.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-saga": "^0.16.2",
+    "reselect": "^4.0.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -52,6 +56,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
     "mini-css-extract-plugin": "^0.4.3",
+    "node-sass": "^4.10.0",
     "nodemon": "^1.18.4",
     "postcss-loader": "^3.0.0",
     "react-test-renderer": "^16.5.2",

@@ -1,5 +1,3 @@
-const path = require('path');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -8,11 +6,11 @@ const Autoprefixer = require('autoprefixer');
 const outputDirectory = 'dist';
 const devMode = process.env.NODE_ENV === 'development';
 
-module.exports = {
-  entry: './client/index.js',
+const config = {
+  entry: './src/client/index.js',
   output: {
-    path: path.join(__dirname, outputDirectory),
-    filename: '[chunkhash].bundle.js',
+    path: `${__dirname}/${outputDirectory}`,
+    filename: '[hash].bundle.js',
   },
   module: {
     rules: [
@@ -27,16 +25,17 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
+          { loader: 'css-loader', options: { minimize: true } },
           {
             loader: 'postcss-loader',
             options: {
+              ident: 'postcss',
               plugins: () => [Autoprefixer({
                 browsers: ['> 1%', 'last 2 versions']
               })],
             }
           },
+          'sass-loader',
         ],
       },
       {
@@ -50,7 +49,9 @@ module.exports = {
   },
   devServer: {
     port: 3000,
-    // open: true,
+    open: true,
+    hot: true,
+    historyApiFallback: true,
     proxy: {
       '/api': {
         target: 'http://localhost:4000',
@@ -60,10 +61,18 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin([outputDirectory]),
-    new HtmlWebpackPlugin({ template: './client/index.html' }),
+    new HtmlWebpackPlugin({ template: './src/client/index.html' }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
   ],
+};
+
+module.exports = (env, argv) => {
+  if (argv.mode === 'development') {
+    config.devtool = 'source-map';
+  }
+
+  return config;
 };
