@@ -5,11 +5,9 @@
   "main": "src/server/index.js",
   "parser": "babel-eslint",
   "scripts": {
-    "start": "babel-node src/server/index.js",
+    "start": "NODE_ENV=production node ./server/index.js",
     "build": "webpack --mode production",
-    "client": "webpack-dev-server --hot --mode development",
-    "server": "nodemon src/server/index.js --exec babel-node",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "concurrently \"webpack-dev-server --mode development\" \"nodemon --watch server ./server/index.js\"",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx; true"
   },
@@ -17,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "express": "^4.16.3", 
     "helmet": "^3.13.0",
     "mongoose": "^5.3.1",
     "react": "^16.5.2",

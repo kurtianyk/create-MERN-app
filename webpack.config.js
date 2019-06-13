@@ -6,13 +6,14 @@ const Autoprefixer = require('autoprefixer');
 module.exports = (env, argv) => {
 
   const outputDirectory = 'dist';
-  const devMode = process.env.NODE_ENV === 'development';
+  const isProduction = argv && argv.mode && argv.mode === 'production';
 
   return  {
     entry: './client/index.js',
     output: {
+      filename: isProduction ? '[name].[chunkhash].js' : '[name].[hash].js',
+      chunkFilename: isProduction ? 'vendor.[chunkhash].js' : 'vendor.[hash].js',
       path: `${__dirname}/${outputDirectory}`,
-      filename: '[hash].bundle.js',
     },
     module: {
       rules: [
@@ -61,8 +62,8 @@ module.exports = (env, argv) => {
       new CleanWebpackPlugin([outputDirectory]),
       new HtmlWebpackPlugin({ template: './src/client/index.html' }),
       new MiniCssExtractPlugin({
-        filename: devMode ? '[name].css' : '[name].[hash].css',
-        chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+        filename: isProduction ? '[name].[hash].css' : '[name].css',
+        chunkFilename: isProduction ? '[id].[hash].css' : '[id].css',
       }),
     ],
     devServer: {
