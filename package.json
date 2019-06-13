@@ -17,11 +17,13 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "helmet": "^3.13.0",
+    "immutable": "^4.0.0-rc.12",
     "mongoose": "^5.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
+    "redux-immutable": "^4.0.0",
     "redux-saga": "^0.16.2",
     "reselect": "^4.0.0"
   },
