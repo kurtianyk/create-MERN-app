@@ -1,13 +1,13 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-// import throttle from 'lodash/throttle';
+import throttle from 'lodash/throttle';
 
 import { saveState, loadState } from './utils/localStorage';
 import configureStore from './configureStore';
 
 import Routes from './routing/Routes';
-// import ErrorPage from './containers/ErrorPage/LazyComponent';
+import ErrorBoundary from './containers/ErrorBoundary/LazyComponent';
 
 const App = () => <Routes />;
 
@@ -27,9 +27,9 @@ const store = configureStore(initialState);
 
 render(
   <Provider store={store}>
-    {/* <ErrorPage errorMessage='Ooops, smth went wrong'> */}
+    <ErrorBoundary errorMessage='Ooops, smth went wrong'>
       <App />
-    {/* </ErrorPage> */}
+    </ErrorBoundary>
    </Provider>,
   document.getElementById('react-root'),
 );
