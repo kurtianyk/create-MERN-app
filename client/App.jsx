@@ -31,5 +31,5 @@ render(
       <App />
     </ErrorBoundary>
    </Provider>,
-  document.getElementById('react-root'),
+  document.getElementById('root'),
 );

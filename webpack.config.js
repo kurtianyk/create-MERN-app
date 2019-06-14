@@ -1,18 +1,28 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const path = require('path');
 const Autoprefixer = require('autoprefixer');
+const cssnano = require('cssnano');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const dotenv = require('dotenv-safe');
 
 module.exports = (env, argv) => {
+  dotenv.config();
 
   const outputDirectory = 'dist';
   const isProduction = argv && argv.mode && argv.mode === 'production';
+
+  const APP_PORT = process.env.APP_PORT || 3001;
+  const APP_HOST = process.env.APP_HOST || 'localhost';
 
   return  {
     entry: './client/index.js',
     output: {
       filename: isProduction ? '[name].[chunkhash].js' : '[name].[hash].js',
-      chunkFilename: isProduction ? 'vendor.[chunkhash].js' : 'vendor.[hash].js',
+      // chunkFilename: isProduction ? 'vendor.[chunkhash].js' : 'vendor.[hash].js',
       path: `${__dirname}/${outputDirectory}`,
     },
     module: {
@@ -27,19 +37,26 @@ module.exports = (env, argv) => {
         {
           test: /\.(sa|sc|c)ss$/,
           use: [
-            devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
             { loader: 'css-loader', options: { minimize: true } },
             {
               loader: 'postcss-loader',
               options: {
                 ident: 'postcss',
-                plugins: () => [Autoprefixer({
-                  browsers: ['> 1%', 'last 2 versions']
-                })],
+                plugins: () => {
+                  const plugins = [Autoprefixer()];
+                  if (isProduction) plugins.push(cssnano());
+                  return plugins;
+                },
               }
             },
             'sass-loader',
           ],
+        },
+        {
+          type: 'javascript/auto',
+          test: /\.json$/,
+          loader: 'json-loader',
         },
         {
           test: /\.(png|woff|woff2|eot|ttf|svg)$/,
@@ -68,13 +85,31 @@ module.exports = (env, argv) => {
       },
 
     plugins: [
-      new CleanWebpackPlugin([outputDirectory]),
+      new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({ template: './client/index.html' }),
       new MiniCssExtractPlugin({
         filename: isProduction ? '[name].[hash].css' : '[name].css',
         chunkFilename: isProduction ? '[id].[hash].css' : '[id].css',
       }),
+      new CopyWebpackPlugin([
+        {
+          from: './client/assets/',
+          to: 'client/assets',
+        },
+      ]),
     ],
+    optimization: {
+      minimizer: [new TerserPlugin()],
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /node_modules/,
+            chunks: 'initial',
+            enforce: true,
+          },
+        },
+      },
+    },
     devServer: {
       port: 3000,
       open: true,
@@ -82,7 +117,7 @@ module.exports = (env, argv) => {
       historyApiFallback: true,
       proxy: {
         '/api': {
-          target: 'http://localhost:4000',
+          target: `http://${APP_HOST}:${APP_PORT}`,
           secure: false
         }
       }

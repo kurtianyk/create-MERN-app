@@ -7,7 +7,7 @@ import MainLayout from 'Layout/MainLayout';
 import ExamplePage from 'Containers/ExamplePage/LazyComponent';
 import NoMatch from 'Containers/NoMatch/LazyComponent';
 
-import AppRouteProps from './router/AppRouteProps';
+import AppRouteProps from './routerHOCs/AppRouteProps';
 
 const Routes = () => (
   <Router>
