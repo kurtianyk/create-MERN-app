@@ -1,16 +1,23 @@
 {
-  "extends": "airbnb",
   "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "plugin:jsx-a11y/recommended",
+  ],
   "env": {
     "browser": true,
     "node": true,
+    "jest": true,
     "mocha": true
    },
+   "settings": {
+    "import/resolver": "webpack"
+  },
   "rules": {
     "comma-dangle": "off",
     "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": ["error", "unix"],
     "react/jsx-filename-extension": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/button-has-type": "off",

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
+    // eslint-disable-next-line react/no-unused-state
     this.state = { hasError: false };
   }
 
