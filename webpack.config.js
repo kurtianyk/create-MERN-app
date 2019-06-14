@@ -48,6 +48,15 @@ module.exports = (env, argv) => {
       ],
     },
     resolve: {
+      modules: ['node_modules'],
+      alias: {
+        Containers: path.resolve(__dirname, 'client/containers'),
+        Layout: path.resolve(__dirname, 'client/components/layout'),
+        Common: path.resolve(__dirname, 'client/components/common'),
+        Form: path.resolve(__dirname, 'client/components/form'),
+        Services: path.resolve(__dirname, 'client/services'),
+        Utils: path.resolve(__dirname, 'client/utils'),
+      },
       extensions: ['.js', '.jsx'],
     },
     devtool: 'source-map',
@@ -60,7 +69,7 @@ module.exports = (env, argv) => {
 
     plugins: [
       new CleanWebpackPlugin([outputDirectory]),
-      new HtmlWebpackPlugin({ template: './src/client/index.html' }),
+      new HtmlWebpackPlugin({ template: './client/index.html' }),
       new MiniCssExtractPlugin({
         filename: isProduction ? '[name].[hash].css' : '[name].css',
         chunkFilename: isProduction ? '[id].[hash].css' : '[id].css',

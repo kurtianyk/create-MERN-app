@@ -19,12 +19,15 @@
     "helmet": "^3.13.0",
     "immutable": "^4.0.0-rc.12",
     "mongoose": "^5.3.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^4.3.1",
     "redux": "^4.0.1",
     "redux-immutable": "^4.0.0",
     "redux-saga": "^0.16.2",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
     "reselect": "^4.0.0"
   },
   "devDependencies": {

@@ -23,7 +23,7 @@ class ErrorBoundary extends Component {
       const { errorMessage } = this.props;
       return (
         <div>
-          {errorMessage}
+          {errorMessage || 'Something went wrong'}
         </div>
       );
     }
