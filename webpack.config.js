@@ -18,7 +18,7 @@ module.exports = (env, argv) => {
   const APP_PORT = process.env.APP_PORT || 3001;
   const APP_HOST = process.env.APP_HOST || 'localhost';
 
-  return  {
+  return {
     entry: './client/index.js',
     output: {
       filename: isProduction ? '[name].[chunkhash].js' : '[name].[hash].js',
@@ -77,13 +77,12 @@ module.exports = (env, argv) => {
       extensions: ['.js', '.jsx'],
     },
     devtool: 'source-map',
-      watch: true,
-      node: {
-        fs: 'empty',
-        net: 'empty',
-        tls: 'empty',
-      },
-
+    watch: true,
+    node: {
+      fs: 'empty',
+      net: 'empty',
+      tls: 'empty',
+    },
     plugins: [
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({ template: './client/index.html' }),

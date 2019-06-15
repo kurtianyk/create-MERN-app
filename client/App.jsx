@@ -27,7 +27,7 @@ const store = configureStore(initialState);
 
 render(
   <Provider store={store}>
-    <ErrorBoundary errorMessage='Ooops, smth went wrong'>
+    <ErrorBoundary errorMessage="Ooops, smth went wrong">
       <App />
     </ErrorBoundary>
    </Provider>,
