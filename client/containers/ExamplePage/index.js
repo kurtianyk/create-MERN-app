@@ -11,8 +11,8 @@ import makeSelectExamplePageContainer from './selector';
 import reducer from './reducer';
 import saga from './saga';
 import {
-  addExampleInit,
   fetchExampleInit,
+  addExampleInit,
   updateExampleInit,
   deleteExampleInit,
 } from './actions';
@@ -36,8 +36,8 @@ class ExamplePage extends PureComponent {
 
   render() {
     const {
-      addExample,
       fetchExample,
+      addExample,
       updateExample,
       deleteExample,
       examplePageContainer,
@@ -52,8 +52,8 @@ class ExamplePage extends PureComponent {
 }
 
 ExamplePage.propTypes = {
-  addUser: PropTypes.func.isRequired,
   fetchExample: PropTypes.func.isRequired,
+  addExample: PropTypes.func.isRequired,
   updateExample: PropTypes.func.isRequired,
   deleteExample: PropTypes.func.isRequired,
   ExamplePageContainer: PropTypes.shape({
