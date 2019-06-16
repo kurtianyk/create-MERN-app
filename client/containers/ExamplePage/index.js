@@ -44,7 +44,7 @@ class ExamplePage extends PureComponent {
     } = this.props;
 
     return (
-      <div>
+      <div className="container">
         ExamplePage!
       </div>
     );
