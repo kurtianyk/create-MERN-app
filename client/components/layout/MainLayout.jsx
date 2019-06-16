@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// import Navigation from 'Common/Navigation';
+import Navigation from 'Common/Navigation';
 
 const MainLayout = ({ children }) => (
   <>
     <header className="header" role="banner">
-      {/* <Navigation /> */}
+      <Navigation />
     </header>
     <main className="main" role="main">
       {children}

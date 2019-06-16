@@ -29,9 +29,9 @@ Button.propTypes = {
   onClick: PropTypes.func,
   modifier: PropTypes.oneOf([
     'default',
-    'primary',
-    'danger',
-    'success',
+    'blue',
+    'red',
+    'green',
   ]),
   className: PropTypes.string,
   text: PropTypes.string,

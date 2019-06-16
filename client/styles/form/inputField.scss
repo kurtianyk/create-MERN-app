@@ -1,0 +1,40 @@
+.input-field {
+  font-family: $font-family-main;
+  font-size: 16px;
+  color: #222;
+  background-color: #fff;
+  border-color: hsl(0, 0%, 80%);
+  border-radius: 4px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 2px 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  min-height: 38px;
+  outline: 0;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  cursor: text;
+
+  &::placeholder {
+    color: hsl(0, 0%, 50%);
+  }
+
+  &:hover {
+    border-color: hsl(0, 0%, 70%);
+  }
+
+  &:focus {
+    border-color: #2684ff;
+    box-shadow: 0 0 0 1px #2684ff;
+    background-color: hsl(0, 0%, 100%);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    background-color: hsl(0, 0%, 95%);
+    border-color: hsl(0, 0%, 90%);
+  }
+}

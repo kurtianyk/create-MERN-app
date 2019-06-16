@@ -7,6 +7,13 @@ import { compose } from 'redux';
 import injectSaga from 'Utils/injectSaga';
 import injectReducer from 'Utils/injectReducer';
 
+import {
+  Form,
+  Button,
+  InputField,
+  Label,
+} from 'Form'; // Form is an alias for 'client/components/form' and  Utils is an alias for 'client/utils' (see the webpack.config.js file) ,
+
 import makeSelectExamplePageContainer from './selector';
 import reducer from './reducer';
 import saga from './saga';
@@ -21,17 +28,23 @@ class ExamplePage extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      example: {},
+      somedata1: '',
+      somedata2: '',
     };
   }
 
-  static getDerivedStateFromProps(props) {
-    const { examplePageContainer } = props;
-    const { example } = examplePageContainer;
+  onChange = ({ target: { name, value } = {} } = {}) => {
+    if (name) {
+      this.setState({
+        [name]: value,
+      });
+    }
+  }
 
-    return {
-      example: example || {},
-    };
+  onSubmit = (event) => {
+    event.preventDefault();
+    const { addExample } = this.props;
+    addExample(this.state);
   }
 
   render() {
@@ -43,9 +56,34 @@ class ExamplePage extends PureComponent {
       examplePageContainer,
     } = this.props;
 
+    const { somedata1, somedata2 } = this.state;
+
     return (
       <div className="container">
-        ExamplePage!
+        <Form onSubmit={() => {}}>
+          <Label htmlFor="input-field-somedata1">
+            Some data
+          </Label>
+          <InputField
+            id="input-field-somedata1"
+            placeholder="Some data"
+            name="somedata1"
+            value={somedata1}
+            onChange={this.onChange}
+          />
+          <Label htmlFor="input-field-somedata2">
+            Some data
+          </Label>
+          <InputField
+            id="input-field-somedata2"
+            placeholder="Some data"
+            name="somedata2"
+            value={somedata2}
+            onChange={this.onChange}
+          />
+          <Button type="submit" modifier="green" text="Submit" onClick={this.onSubmit} />
+        </Form>
+        <p> Data from redux store: {JSON.stringify(examplePageContainer)}</p>
       </div>
     );
   }
@@ -56,7 +94,7 @@ ExamplePage.propTypes = {
   addExample: PropTypes.func.isRequired,
   updateExample: PropTypes.func.isRequired,
   deleteExample: PropTypes.func.isRequired,
-  ExamplePageContainer: PropTypes.shape({
+  examplePageContainer: PropTypes.shape({
     example: PropTypes.object,
     errorMessage: PropTypes.string,
     isLoading: PropTypes.bool,

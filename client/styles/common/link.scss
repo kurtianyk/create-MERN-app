@@ -1,0 +1,23 @@
+a {
+  text-decoration: none;
+  color: $text-color-link;
+  font-family: $font-family-main;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:focus {
+    outline: none;
+    border-radius: 2px;
+    box-shadow: 0 0 0 2px rgba($text-color-link, 0.2) inset;
+  }
+
+  &:active {
+    color: $text-color-active-link;
+  }
+
+  &:visited {
+    color: $text-color-visited-link;
+  }
+}

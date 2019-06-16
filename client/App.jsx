@@ -12,8 +12,7 @@ import ErrorBoundary from './containers/ErrorBoundary/LazyComponent';
 const App = () => <Routes />;
 
 const initialState = loadState() || {};
-const store = configureStore(initialState);
-
+export const store = configureStore(initialState);
 
 /**
  * Persist state to Local Storage across browser sessions

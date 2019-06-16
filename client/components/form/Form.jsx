@@ -10,7 +10,7 @@ const Form = ({
 
   return (
     <form
-      className={className}
+      className={`form ${className}`}
       onSubmit={onSubmit}
     >
       {children}

@@ -1,0 +1,17 @@
+.navigation ul {
+  @include clearfix;
+
+  a {
+    display: block;
+    padding: 15px 10px;
+  }
+
+  li {
+    display: block;
+    float: left;
+
+    &:first-child a {
+      padding-left: 0;
+    }
+  }
+}

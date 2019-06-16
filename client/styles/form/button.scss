@@ -1,0 +1,130 @@
+.button {
+  $color: $color-dark;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  white-space: pre;
+  user-select: none;
+  background: $color;
+  border: 1px solid $color;
+  border-radius: 4px;
+  min-width: 80px;
+  padding: 10px 16px;
+  margin: 0;
+  color: #fff;
+  font-family: $font-family-main;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  &:hover {
+    background: darken($color, 5%);
+    border-color: darken($color, 5%);
+  }
+
+  &:active {
+    background: lighten($color, 5%);
+    border-color: lighten($color, 5%);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(0, 128, 255, 0.1);
+    outline: none;
+  }
+
+  &-green {
+    $color: $color-green;
+
+    background: $color;
+    border: 1px solid $color;
+
+    &:hover {
+      background: darken($color, 5%);
+      border-color: darken($color, 5%);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($color, 0.1);
+    }
+
+    &:active {
+      background: lighten($color, 5%);
+      border-color: lighten($color, 5%);
+    }
+  }
+
+  &-blue {
+    $color: $color-blue;
+
+    background: $color;
+    border: 1px solid $color;
+
+    &:hover {
+      background: darken($color, 5%);
+      border-color: darken($color, 5%);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($color, 0.1);
+    }
+
+    &:active {
+      background: lighten($color, 5%);
+      border-color: lighten($color, 5%);
+    }
+  }
+
+  &-red {
+    $color: $color-red;
+
+    background: $color;
+    border: 1px solid $color;
+
+    &:hover {
+      background: darken($color, 5%);
+      border-color: darken($color, 5%);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 3px rgba($color, 0.1);
+    }
+
+    &:active {
+      background: lighten($color, 5%);
+      border-color: lighten($color, 5%);
+    }
+  }
+
+  &:disabled {
+    background-color: $disable-color-main;
+    border: 1px solid $disable-color-secondary;
+    color: $text-color-secondary;
+    cursor: auto;
+  }
+
+  &.loading {
+    border: 1px solid transparent;
+    animation: pulse 2s infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &.loading {
+      animation: none;
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      background-color: $disable-color-main;
+    }
+
+    50% {
+      background-color: $disable-color-secondary;
+    }
+
+    100% {
+      background-color: $disable-color-main;
+    }
+  }
+}
