@@ -1,10 +1,11 @@
-import path from 'path';
-import express from 'express';
-import mongoose from 'mongoose';
-import helmet from 'helmet';
-import bodyParser from 'body-parser';
-// import router from './routes';
-import { MONGODB_URI, MONGODB_OPTIONS, PORT } from './config';
+const path = require('path');
+const express = require('express');
+const mongoose = require('mongoose');
+const helmet = require('helmet');
+const bodyParser = require('body-parser');
+
+// const router = require('./routes');
+// const { MONGODB_URI, MONGODB_OPTIONS, PORT } = require('./config');
 
 const app = express();
 
@@ -16,10 +17,10 @@ app.use(express.static('dist'));
 
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../client/index.html')));
 
-mongoose.connect(MONGODB_URI, MONGODB_OPTIONS);
+// mongoose.connect(MONGODB_URI, MONGODB_OPTIONS);
 
 mongoose.connection.on('connected', () => {
-  app.listen(PORT, () => {
+  app.listen(process.env.PORT, () => {
     console.log('Server running at 4000 port');
   });
 });
