@@ -12,7 +12,7 @@ import {
   Button,
   InputField,
   Label,
-} from 'Form';
+} from 'Form'; // Form is an alias for 'client/components/form' and  Utils is an alias for 'client/utils' (see the webpack.config.js file) ,
 
 import makeSelectExamplePageContainer from './selector';
 import reducer from './reducer';

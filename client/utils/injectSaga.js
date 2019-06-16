@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { store } from '../App';
+
 const sagasList = {};
 export default ({ key, saga }) => (WrappedComponent) => {
-  const SagaInjector = (props, ) => {
+  const SagaInjector = (props, { store }) => {
     if (!sagasList[key]) {
       store.injectSaga(key, saga);
       sagasList[key] = true;

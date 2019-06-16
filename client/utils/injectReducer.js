@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { store } from '../App';
 
 export default ({ key, reducer }) => (WrappedComponent) => {
-  const ReducerInjector = (props, sr) => {
-    console.log(sr, 'store');
+  const ReducerInjector = (props, { store }) => {
     store.injectReducer(key, reducer);
 
     return <WrappedComponent {...props} />;
