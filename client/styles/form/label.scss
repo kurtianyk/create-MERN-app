@@ -1,0 +1,14 @@
+.label {
+  display: block;
+  font-family: $font-family-main;
+  font-size: 18px;
+  color: $text-color-main;
+  padding: $space-small 0;
+
+  span {
+    display: block;
+    font-size: 16px;
+    color: $text-color-secondary;
+    margin: $space-small 0 0;
+  }
+}
