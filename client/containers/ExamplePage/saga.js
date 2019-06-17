@@ -27,9 +27,9 @@ import {
   EXAMPLE_ADD_INIT,
 } from './constants';
 
-export function* fetchExample(e, action) {
+export function* fetchExample() {
   try {
-    const response = yield call(api.fetchExample, action.exampleId);
+    const response = yield call(api.fetchExample);
     yield put(fetchExampleSuccess(response.data));
   } catch (err) {
     yield put(fetchExampleFailure(err.message));

@@ -14,7 +14,14 @@
   "author": "Oleh Kurtianyk",
   "license": "ISC",
   "jest": {
-    "setupTestFrameworkScriptFile": "<rootDir>/test.config.js"
+    "setupTestFrameworkScriptFile": "<rootDir>/test.config.js",
+    "moduleNameMapper": {
+      "^Containers(.*)$": "<rootDir>/src/containers$1",
+      "^Layout(.*)$": "<rootDir>/client/components/layout$1",
+      "^Form(.*)$": "<rootDir>/client/components/form$1",
+      "^Services(.*)$": "<rootDir>/client/services$1",
+      "^Utils(.*)$": "<rootDir>/client/utils$1"
+    }
   },
   "dependencies": {
     "body-parser": "^1.19.0",
