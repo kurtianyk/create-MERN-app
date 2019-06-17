@@ -12,10 +12,10 @@ const rp = request.defaults({
   json: true,
 });
 
-const fetchExample = exampleId => rp.get(`/example/${exampleId}`);
-const addExample = example => rp.post({ uri: '/example/', body: { example } });
-const updateExample = (exampleId, example) => rp.put({ uri: `/example/${exampleId}`, body: { example } });
-const deleteExample = exampleId => rp.delete(`/example/${exampleId}`);
+const fetchExample = exampleId => rp.get(`/api/example/${exampleId}`);
+const addExample = example => rp.post({ uri: '/api/example/', body: { example } });
+const updateExample = (exampleId, example) => rp.put({ uri: `/api/example/${exampleId}`, body: { example } });
+const deleteExample = exampleId => rp.delete(`/api/example/${exampleId}`);
 
 export default {
   fetchExample,

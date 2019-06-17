@@ -1,39 +1,53 @@
-const path = require('path');
 const express = require('express');
-const mongoose = require('mongoose');
 const helmet = require('helmet');
-const bodyParser = require('body-parser');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const cors = require('cors');
+const compression = require('compression');
+const mongoose = require('mongoose');
+// const routes = require('./routes');
 
-// const router = require('./routes');
-// const { MONGODB_URI, MONGODB_OPTIONS, PORT } = require('./config');
+require('dotenv-safe').config();
+
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/test';
+const APP_HOST = process.env.APP_HOST || 'localhost';
+const APP_PORT = process.env.APP_PORT || 3001;
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 const app = express();
 
+app.disable('etag');
+
+app.use(cors());
 app.use(helmet());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(compression());
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static('dist'));
-// app.use('/api', router);
 
-app.get('/*', (req, res) => res.sendFile(path.join(__dirname, '../client/index.html')));
+// app.use('/api', routes);
+app.get('/*', (req, res) => res.sendFile(path.join(__dirname, `../${isProduction ? 'dist' : 'client'}/index.html`)));
 
-// mongoose.connect(MONGODB_URI, MONGODB_OPTIONS);
+mongoose.set('useCreateIndex', true);
 
-mongoose.connection.on('connected', () => {
-  app.listen(process.env.PORT, () => {
-    console.log('Server running at 4000 port');
-  });
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  keepAlive: 300000,
 });
 
-// mongoose.set('useCreateIndex', true);
-// mongoose.connect(MONGODB_URI, MONGODB_OPTIONS);
+mongoose.connection.on('error', (err) => {
+  console.error('Mongoose failed to connect', err);
 
-// mongoose.connection.on('error', (err) => {
-//   console.error('Mongoose failed to connect', err);
+  mongoose.disconnect();
+});
 
-//   mongoose.disconnect();
-// });
-
-// mongoose.connection.on('connected', () => {
-//   app.listen(PORT);
-// });
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose connected successful');
+  app.listen(APP_PORT, APP_HOST, () => {
+    console.log(`Server running at http://${APP_HOST}:${APP_PORT}`);
+  });
+});
