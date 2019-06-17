@@ -16,10 +16,9 @@ import {
   EXAMPLE_DELETE_FAILURE,
 } from './constants';
 
-export function fetchExampleInit(exampleId) {
+export function fetchExampleInit() {
   return {
     type: EXAMPLE_FETCH_INIT,
-    exampleId,
   };
 }
 
