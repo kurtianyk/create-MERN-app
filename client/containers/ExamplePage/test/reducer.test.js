@@ -9,7 +9,7 @@ import {
 } from '../constants';
 
 const initialState = fromJS({
-  example: {},
+  example: [],
   isLoading: false,
   showError: false,
   errorMessage: '',
@@ -57,7 +57,7 @@ describe('exampleReducer', () => {
     expect(exampleReducer(initialState, action)).toEqual(
       initialState
         .set('isLoading', false)
-        .set('example', fromJS({}))
+        .set('example', fromJS([]))
         .set('showError', true)
         .set('errorMessage', action.message)
     );

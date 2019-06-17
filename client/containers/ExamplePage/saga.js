@@ -30,7 +30,8 @@ import {
 export function* fetchExample() {
   try {
     const response = yield call(api.fetchExample);
-    yield put(fetchExampleSuccess(response.data));
+    const { body } = response;
+    yield put(fetchExampleSuccess(body));
   } catch (err) {
     yield put(fetchExampleFailure(err.message));
   }
@@ -39,10 +40,9 @@ export function* fetchExample() {
 export function* addExample(e, action) {
   try {
     const response = yield call(api.addExample, action.example);
-    if (response.ok) {
-      yield put(addExampleSuccess(response.data));
-    } else {
-      yield put(addExampleFailure(response.data.msg));
+    const { statusCode, body } = response;
+    if (statusCode === 200) {
+      yield put(addExampleSuccess(body));
     }
   } catch (err) {
     yield put(addExampleFailure(err.message));
@@ -52,7 +52,8 @@ export function* addExample(e, action) {
 export function* updateExample(e, action) {
   try {
     const response = yield call(api.updateExample, action.exampleId, action.example);
-    yield put(updateExampleSuccess(response.data));
+    const { body } = response;
+    yield put(updateExampleSuccess(body));
   } catch (err) {
     yield put(updateExampleFailure(err.message));
   }
@@ -61,11 +62,9 @@ export function* updateExample(e, action) {
 export function* deleteExample(e, action) {
   try {
     const response = yield call(api.deleteExample, action.exampleId);
-    const { data, ok, problem } = response;
-    if (ok) {
-      yield put(deleteExampleSuccess(data));
-    } else {
-      yield put(deleteExampleFailure(problem));
+    const { statusCode, body } = response;
+    if (statusCode === 200) {
+      yield put(deleteExampleSuccess(body));
     }
   } catch (err) {
     yield put(deleteExampleFailure(err.message));

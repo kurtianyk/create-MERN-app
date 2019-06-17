@@ -33,6 +33,11 @@ class ExamplePage extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    const { fetchExample } = this.props;
+    fetchExample();
+  }
+
   onChange = ({ target: { name, value } = {} } = {}) => {
     if (name) {
       this.setState({
@@ -95,7 +100,7 @@ ExamplePage.propTypes = {
   updateExample: PropTypes.func.isRequired,
   deleteExample: PropTypes.func.isRequired,
   examplePageContainer: PropTypes.shape({
-    example: PropTypes.object,
+    example: PropTypes.array,
     errorMessage: PropTypes.string,
     isLoading: PropTypes.bool,
     showError: PropTypes.bool,
@@ -109,7 +114,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     addExample: example => dispatch(addExampleInit(example)),
-    fetchExample: exampleId => dispatch(fetchExampleInit(exampleId)),
+    fetchExample: () => dispatch(fetchExampleInit()),
     updateExample: (exampleId, example) => dispatch(updateExampleInit(exampleId, example)),
     deleteExample: exampleId => dispatch(deleteExampleInit(exampleId)),
   };

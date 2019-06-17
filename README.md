@@ -1,0 +1,1 @@
+# MERN (React, Redux, Webpack, Node.js, Express.js, MongoDB) app starter kit

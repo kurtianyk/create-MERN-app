@@ -1,1 +1,3 @@
-export { default as User } from './user';
+const Example = require('./example');
+
+module.exports = { Example };
