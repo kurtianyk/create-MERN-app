@@ -19,7 +19,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
-  example: {},
+  example: [],
   isLoading: false,
   showError: false,
   errorMessage: '',
@@ -39,7 +39,7 @@ function exampleReducer(state = initialState, action) {
     case EXAMPLE_FETCH_FAILURE:
       return state
         .set('isLoading', false)
-        .set('example', fromJS({}))
+        .set('example', fromJS([]))
         .set('showError', true)
         .set('errorMessage', action.message);
 
@@ -47,7 +47,7 @@ function exampleReducer(state = initialState, action) {
       return state
         .set('isLoading', true)
         .set('showError', false)
-        .set('errorMessage', false);
+        .set('errorMessage', '');
     case EXAMPLE_ADD_SUCCESS:
       return state
         .set('isLoading', false)

@@ -7,7 +7,7 @@ const logger = require('morgan');
 const cors = require('cors');
 const compression = require('compression');
 const mongoose = require('mongoose');
-// const routes = require('./routes');
+const routes = require('./routes/index.route');
 
 require('dotenv-safe').config();
 
@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static('dist'));
 
-// app.use('/api', routes);
+app.use('/api', routes);
 app.get('/*', (req, res) => res.sendFile(path.join(__dirname, `../${isProduction ? 'dist' : 'client'}/index.html`)));
 
 // catch 404 and forward to error handler

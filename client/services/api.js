@@ -10,9 +10,10 @@ const rp = request.defaults({
     'Content-Type': 'application/json',
   },
   json: true,
+  resolveWithFullResponse: true,
 });
 
-const fetchExample = exampleId => rp.get(`/api/example/${exampleId}`);
+const fetchExample = () => rp.get('/api/example/');
 const addExample = example => rp.post({ uri: '/api/example/', body: { example } });
 const updateExample = (exampleId, example) => rp.put({ uri: `/api/example/${exampleId}`, body: { example } });
 const deleteExample = exampleId => rp.delete(`/api/example/${exampleId}`);
