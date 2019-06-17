@@ -30,6 +30,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.18.0",
+    "http-errors": "^1.7.2",
     "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.11",
     "mongoose": "^5.5.15",
